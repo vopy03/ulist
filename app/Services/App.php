@@ -29,7 +29,7 @@ class App {
         }
     } 
 
-    public static function load_table($table_name) {
+    public static function loadTable($table_name) {
         // load all table
         return \R::findAll($table_name);
     }

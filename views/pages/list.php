@@ -1,9 +1,8 @@
 <?php 
 
 use App\Services\Page;
-use App\Services\Router;
-
-
+use App\Services\App;
+// use App\Services\Router;
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ use App\Services\Router;
 <?php Page::part('head')  ?>
 <body>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/assets/css/styles.css" rel="stylesheet">
+  <link href="<?=$_SERVER['REQUEST_URI']?>/assets/css/styles.css" rel="stylesheet">
   <div class="container">
     <div class="row flex-lg-nowrap">
       <div class="col">
@@ -41,17 +40,24 @@ use App\Services\Router;
                         </tr>
                       </thead>
                       <tbody>
+
+                      <?php
+
+                      $users = App::loadTable('users');
+                      $roles = App::loadTable('roles');
+                      
+                      foreach($users as $user) { ?>
                         <tr>
                           <td class="align-middle">
                             <div
                               class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                              <input type="checkbox" class="custom-control-input" id="item-1">
-                              <label class="custom-control-label" for="item-1"></label>
+                              <input type="checkbox" class="custom-control-input" id="item-<?=$user['id']?>">
+                              <label class="custom-control-label" for="item-<?=$user['id']?>"></label>
                             </div>
                           </td>
-                          <td class="text-nowrap align-middle">Adam Cotter</td>
-                          <td class="text-nowrap align-middle"><span>Active</span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle active-circle"></i></td>
+                          <td class="text-nowrap align-middle"><?=$user['first_name']?> <?=$user['last_name']?></td>
+                          <td class="text-nowrap align-middle"><span><?=$roles[$user['role_id']]['name']?></span></td>
+                          <td class="text-center align-middle"><i class="fa fa-circle <?=$user['status'] ? '' : 'not-'?>active-circle"></i></td>
                           <td class="text-center align-middle">
                             <div class="btn-group align-top">
                               <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
@@ -61,86 +67,8 @@ use App\Services\Router;
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <td class="align-middle">
-                            <div
-                              class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                              <input type="checkbox" class="custom-control-input" id="item-2">
-                              <label class="custom-control-label" for="item-2"></label>
-                            </div>
-                          </td>
-                          <td class="text-nowrap align-middle">Pauline Noble</td>
-                          <td class="text-nowrap align-middle"><span>User</span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle active-circle"></i></td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
-                                data-target="#user-form-modal">Edit</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i
-                                  class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle">
-                            <div
-                              class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                              <input type="checkbox" class="custom-control-input" id="item-3">
-                              <label class="custom-control-label" for="item-3"></label>
-                            </div>
-                          </td>
-                          <td class="text-nowrap align-middle">Sherilyn Metzel</td>
-                          <td class="text-nowrap align-middle"><span>Admin</span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle not-active-circle"></i></td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
-                                data-target="#user-form-modal">Edit</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i
-                                  class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle">
-                            <div
-                              class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                              <input type="checkbox" class="custom-control-input" id="item-4">
-                              <label class="custom-control-label" for="item-4"></label>
-                            </div>
-                          </td>
-                          <td class="text-nowrap align-middle">Terrie Boaler</td>
-                          <td class="text-nowrap align-middle"><span>Admin</span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle active-circle"></i></td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
-                                data-target="#user-form-modal">Edit</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i
-                                  class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle">
-                            <div
-                              class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                              <input type="checkbox" class="custom-control-input" id="item-5">
-                              <label class="custom-control-label" for="item-5"></label>
-                            </div>
-                          </td>
-                          <td class="text-nowrap align-middle">Rutter Pude</td>
-                          <td class="text-nowrap align-middle"><span>User</span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle active-circle"></i></td>
-                          <td class="text-center align-middle">
-                            <div class="btn-group align-top">
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
-                                data-target="#user-form-modal">Edit</button>
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button"><i
-                                  class="fa fa-trash"></i></button>
-                            </div>
-                          </td>
-                        </tr>
+                        <?php } ?>
+
                       </tbody>
                     </table>
                   </div>
