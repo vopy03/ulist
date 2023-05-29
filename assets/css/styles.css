@@ -5,6 +5,18 @@ body{
 .active-circle {
   color: green;
 }
-.not-active-circle {
+/* .not-active-circle {
   color: red;
+} */
+
+.actionbar-container {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.actionbar-container {
+  width: 100%;
+  gap: 10px;
 }

@@ -9,8 +9,7 @@ use App\Services\App;
 <html lang="en">
 <?php Page::part('head')  ?>
 <body>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="<?=$_SERVER['REQUEST_URI']?>/assets/css/styles.css" rel="stylesheet">
+  
   <div class="container">
     <div class="row flex-lg-nowrap">
       <div class="col">
@@ -23,6 +22,9 @@ use App\Services\App;
                 </div>
                 <div class="e-table">
                   <div class="table-responsive table-lg mt-3">
+
+                    <?php Page::part('actionbar'); ?>
+
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -57,7 +59,7 @@ use App\Services\App;
                           </td>
                           <td class="text-nowrap align-middle"><?=$user['first_name']?> <?=$user['last_name']?></td>
                           <td class="text-nowrap align-middle"><span><?=$roles[$user['role_id']]['name']?></span></td>
-                          <td class="text-center align-middle"><i class="fa fa-circle <?=$user['status'] ? '' : 'not-'?>active-circle"></i></td>
+                          <td class="text-center align-middle"><i class="fa fa-circle <?=$user['status'] ? 'active-circle' : ''?>"></i></td>
                           <td class="text-center align-middle">
                             <div class="btn-group align-top">
                               <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
@@ -71,42 +73,49 @@ use App\Services\App;
 
                       </tbody>
                     </table>
+
+                    <?php Page::part('actionbar'); ?>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
         <!-- User Form Modal -->
         
         <div class="modal fade" id="user-form-modal" tabindex="-1" aria-labelledby="user-form-modal" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="UserModalLabel">Add user</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="first-name" class="col-form-label">First Name:</label>
-                  <input type="text" class="form-control" id="first-name">
-                </div>
-                <div class="form-group">
-                  <label for="last-name" class="col-form-label">Last Name:</label>
-                  <input type="text" class="form-control" id="last-name">
-                </div>
-                
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save</button>
-            </div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="UserModalLabel">Add user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="first-name" class="col-form-label">First Name:</label>
+                    <input type="text" class="form-control" id="first-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="last-name" class="col-form-label">Last Name:</label>
+                    <input type="text" class="form-control" id="last-name">
+                  </div>
+                  
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
           </div>
         </div>
+
+        <!-- User Form Modal -->
       </div>
 
     </div>
