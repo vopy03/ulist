@@ -36,7 +36,6 @@ class Router {
     public static function enable() {
         $query = isset($_GET['q']) ? $_GET['q'] : '';
         // return $query;
-
         foreach(self::$list as $route) {
             if ($route["uri"] === '/' . $query) {
                 if(@$route["post"] && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,7 +63,7 @@ class Router {
     }
 
     public static function redirect($uri) {
-        $add = '/fstudy/';
+        $add = '/ulist/';
         header('Location: '.$add.$uri);
     }
 }

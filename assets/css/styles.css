@@ -10,13 +10,21 @@ body{
 } */
 
 .actionbar-container {
-  padding: 5px;
+  padding: 5px 0;
+  margin: 10px 0;
   width: 100%;
   display: flex;
   justify-content: center;
 }
+table {
+  margin-bottom: 0 !important;
+}
 
 .actionbar-container {
   width: 100%;
-  gap: 10px;
+  gap: 24px;
+}
+
+.action-form {
+  display: contents;
 }
