@@ -8,7 +8,10 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link href="<?=$_SERVER['REQUEST_URI']?>/assets/css/styles.css" rel="stylesheet">
+  <link href="<?=$_SERVER['REQUEST_URI']?>/assets/css/clean-switch.css" rel="stylesheet">
   <script src="<?=$_SERVER['REQUEST_URI']?>/assets/js/Selection.js" defer></script>
+  <script src="<?=$_SERVER['REQUEST_URI']?>/assets/js/User.js" defer></script>
   <script src="<?=$_SERVER['REQUEST_URI']?>/assets/js/List.js" defer></script>
+  <script src="<?=$_SERVER['REQUEST_URI']?>/assets/js/Modal.js" defer></script>
   <script src="<?=$_SERVER['REQUEST_URI']?>/assets/js/actionbar.js" defer></script>
 </head>

@@ -16,6 +16,8 @@ Router::post('/actions/status/on', User::class, 'enableStatus', true);
 Router::post('/actions/user/edit', User::class, 'edit', true);
 Router::post('/actions/user/delete', User::class, 'delete', true);
 
+Router::post('/actions/user/delete/:id', User::class, 'delete');
+
 Router::post('/actions/list/refresh', UserList::class, 'refresh', true);
 
 // Router::post('/auth/logout', Auth::class, 'logout');

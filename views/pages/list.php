@@ -57,39 +57,8 @@ use App\Services\App;
           </div>
         </div>
 
+        <?php Page::part('modal'); ?>
 
-        <!-- User Form Modal -->
-        
-        <div class="modal fade" id="user-form-modal" tabindex="-1" aria-labelledby="user-form-modal" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UserModalLabel">Add user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="first-name" class="col-form-label">First Name:</label>
-                    <input type="text" class="form-control" id="first-name">
-                  </div>
-                  <div class="form-group">
-                    <label for="last-name" class="col-form-label">Last Name:</label>
-                    <input type="text" class="form-control" id="last-name">
-                  </div>
-                  
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-              </div>
-          </div>
-        </div>
-
-        <!-- User Form Modal -->
       </div>
 
     </div>
