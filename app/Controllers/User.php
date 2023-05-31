@@ -21,7 +21,9 @@ class User {
                         "code" => 400,
                         "message" => "Заповніть всі поля"
                     ]
-                ]);
+            ]);
+            
+            die();
         }
 
         $user = \R::dispense( 'users' );
@@ -29,13 +31,45 @@ class User {
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->status = $data['status'];
-        $user->role_id = $data['role'];
+        $user->role_id = $data['role_id'];
 
         \R::store( $user );
+
+        echo JSON_encode( [
+            "status" => true,
+            "error" => null,
+            "user" => $user
+        ]);
+
     }
 
-    public function edit($id, $data) {
+    public function edit($data) {
+        if( empty( $data['first_name'] ) || empty( $data['last_name'] ) ) {
 
+            echo JSON_encode( [
+                    "status" => false,
+                    "error" => [
+                        "code" => 400,
+                        "message" => "Заповніть всі поля"
+                    ]
+                ]);
+            die();
+        }
+
+        $user = \R::load( 'users', $data['id'] );
+
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->status = $data['status'];
+        $user->role_id = $data['role_id'];
+
+        \R::store( $user );
+
+        echo JSON_encode( [
+            "status" => true,
+            "error" => null,
+            "user" => $user
+        ]);
     }
 
     public function delete($ids) {

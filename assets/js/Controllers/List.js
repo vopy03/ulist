@@ -6,12 +6,12 @@ class List {
       const editBtns = document.querySelectorAll('.edit-user-btn');
       // console.log(btns);
       deleteBtns.forEach(btn => {
-        btn.onclick = (e) => User.delete(e.target.dataset.id);
+        btn.onclick = (e) => Modal.openDeleteModal(e.target.dataset.id);
       });
 
       // fix this. This for submit event. Not for opening the modal
       editBtns.forEach(btn => {
-        btn.onclick = (e) => User.edit(e.target.dataset.id);
+        btn.onclick = (e) => Modal.openEditModal(e.target.dataset.id);
       });
     }
 

@@ -58,6 +58,7 @@ use App\Services\App;
         </div>
 
         <?php Page::part('modal'); ?>
+        <?php Page::part('deleteConfirmModal'); ?>
 
       </div>
 

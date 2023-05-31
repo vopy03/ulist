@@ -15,6 +15,7 @@ $roles = App::loadTable('roles');
                     </button>
                 </div>
                 <form method="post" action="#" id='modal-form'>
+                    <input type="number" class="form-control" name="id" value="0" id="id" hidden>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="first-name" class="col-form-label">First Name:</label>
@@ -29,13 +30,13 @@ $roles = App::loadTable('roles');
                         <div class="form-group">
                         <label class="cl-switch">
                             <span class="label">Status</span>
-                            <input type="checkbox" name="status" id="status">
+                            <input type="checkbox" name="status" id="status" value="0">
                             <span class="switcher"></span>
                         </label>
                         </div>
                         <div class="form-group">
                             <label for="last-name" class="col-form-label">Role</label>
-                            <select class="custom-select" name="role" id="actionSelect">
+                            <select class="custom-select" name="role_id" id="actionSelect">
                                 <?php foreach($roles as $role){   ?>
                                 <option value="<?=$role->id?>"><?=$role->name?></option>
                                 <?php } ?>
@@ -51,3 +52,4 @@ $roles = App::loadTable('roles');
               
           </div>
         </div>
+                                </div>

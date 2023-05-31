@@ -71,35 +71,35 @@ class Router {
     }
 
     private static function matchRoute($registeredRoute, $currentRoute)
-{
-    $registeredParts = explode('/', trim($registeredRoute, '/'));
-    $currentParts = explode('/', trim($currentRoute, '/'));
-    
-    // Check if the number of parts in the routes match
-    if (count($registeredParts) !== count($currentParts)) {
-        return false;
-    }
-
-    $params = [];
-
-    // Iterate through each part and check for dynamic parts
-    for ($i = 0; $i < count($registeredParts); $i++) {
-        if ($registeredParts[$i] === $currentParts[$i]) {
-            continue;
+    {
+        $registeredParts = explode('/', trim($registeredRoute, '/'));
+        $currentParts = explode('/', trim($currentRoute, '/'));
+        
+        // Check if the number of parts in the routes match
+        if (count($registeredParts) !== count($currentParts)) {
+            return false;
         }
 
-        if (strpos($registeredParts[$i], ':') !== false) {
-            $paramName = trim($registeredParts[$i], ':');
-            $paramValue = $currentParts[$i];
-            $params[$paramName] = $paramValue;
-            continue;
+        $params = [];
+
+        // Iterate through each part and check for dynamic parts
+        for ($i = 0; $i < count($registeredParts); $i++) {
+            if ($registeredParts[$i] === $currentParts[$i]) {
+                continue;
+            }
+
+            if (strpos($registeredParts[$i], ':') !== false) {
+                $paramName = trim($registeredParts[$i], ':');
+                $paramValue = $currentParts[$i];
+                $params[$paramName] = $paramValue;
+                continue;
+            }
+
+            return false;
         }
 
-        return false;
+        return $params;
     }
-
-    return $params;
-}
 
     public static function error($e) {
         require_once 'views/errors/'.$e.'.php';

@@ -21,7 +21,8 @@ foreach($users as $user) { ?>
                             <div class="btn-group align-top">
                               <button class="btn btn-sm btn-outline-secondary badge edit-user-btn" type="button" data-id="<?=$user['id']?>" data-toggle="modal"
                                 data-target="#user-form-modal">Edit</button>
-                              <button class="btn btn-sm btn-outline-secondary badge delete-user-btn" data-id="<?=$user['id']?>"  type="button"><i
+                              <button class="btn btn-sm btn-outline-secondary badge delete-user-btn" data-id="<?=$user['id']?>"  type="button" data-toggle="modal"
+        data-target="#user-delete-modal"><i
                                   class="fa fa-trash" data-id="<?=$user['id']?>"></i></button>
                             </div>
                           </td>

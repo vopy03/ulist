@@ -15,6 +15,7 @@ class Actionbar {
     });
 
     $("form").submit(function (event) {
+      event.preventDefault();
       const choise = event.target[0].value;
       if(Number.isInteger(Number(choise)) && Selection.isSomeChecked()) {
         let formData = {
@@ -23,7 +24,7 @@ class Actionbar {
     
         $.ajax({
           type: "POST",
-          url: urls[choise],
+          url: Actionbar.urls[choise],
           data: formData,
         }).done(function (data) {
           // console.log(data);
@@ -31,7 +32,7 @@ class Actionbar {
           
         });
       }
-      event.preventDefault();
+      
     });
 
     }
