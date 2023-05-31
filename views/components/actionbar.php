@@ -1,7 +1,7 @@
 
   <div class="actionbar-container">
 
-      <button class="btn btn-success" type="button" data-toggle="modal"
+      <button class="btn btn-success" type="button" id="add-user-btn" data-toggle="modal"
         data-target="#user-form-modal">Add</button>
         <form method="post" class="action-form">
           <select class="custom-select" name="action" id="actionSelect">

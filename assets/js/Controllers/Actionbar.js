@@ -1,10 +1,19 @@
-const urls = {
-  1: "actions/status/on",
-  2: "actions/status/off",
-  3: "actions/user/delete",
-}
+class Actionbar {
 
-$(document).ready(function () {
+  static urls = {
+    1: "actions/status/on",
+    2: "actions/status/off",
+    3: "actions/user/delete",
+  }
+
+  static addBtn = $('#add-user-btn');
+
+  static init() {
+
+    this.addBtn.click(() => {
+      Modal.changeModalType('create')
+    });
+
     $("form").submit(function (event) {
       const choise = event.target[0].value;
       if(Number.isInteger(Number(choise)) && Selection.isSomeChecked()) {
@@ -24,4 +33,7 @@ $(document).ready(function () {
       }
       event.preventDefault();
     });
-  });
+
+    }
+
+}

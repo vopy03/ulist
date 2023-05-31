@@ -6,7 +6,8 @@ class User {
     }
 
     static edit(data, id) {
-
+      Modal.changeModalType('edit');
+      console.log(data);
     }
 
     static delete(ids) {
@@ -18,6 +19,17 @@ class User {
             // console.log(data);
             List.refresh();
           });
+    }
+
+    static get(id) {
+        const url = 'actions/user/get/' + id;
+
+        $.ajax({
+          type: "GET",
+          url,
+        }).done(function (data) {
+          return JSON.parse(data);
+        });
     }
 
 }

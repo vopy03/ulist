@@ -50,6 +50,13 @@ class User {
         
     }
 
+    public function get($id) {
+        $id = $id['id'];
+        $user = \R::load( 'users', $id );
+        
+        echo JSON_encode( \R::load( 'users', $id ) );
+    }
+
     public function disableStatus($ids) {
         $users = \R::loadAll( 'users', $ids['ids'] );
         for( $i = 0; $i < count($users); $i++ ) {

@@ -1,10 +1,17 @@
+
 class List {
 
     static init() {
-      const btns = document.querySelectorAll('.delete-user-btn');
+      const deleteBtns = document.querySelectorAll('.delete-user-btn');
+      const editBtns = document.querySelectorAll('.edit-user-btn');
       // console.log(btns);
-      btns.forEach(btn => {
+      deleteBtns.forEach(btn => {
         btn.onclick = (e) => User.delete(e.target.dataset.id);
+      });
+
+      // fix this. This for submit event. Not for opening the modal
+      editBtns.forEach(btn => {
+        btn.onclick = (e) => User.edit(e.target.dataset.id);
       });
     }
 
@@ -22,4 +29,3 @@ class List {
     }
 }
 
-List.init();

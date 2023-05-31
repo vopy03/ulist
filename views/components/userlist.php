@@ -19,7 +19,7 @@ foreach($users as $user) { ?>
                           <td class="text-center align-middle"><i class="fa fa-circle <?=$user['status'] ? 'active-circle' : ''?>"></i></td>
                           <td class="text-center align-middle">
                             <div class="btn-group align-top">
-                              <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal"
+                              <button class="btn btn-sm btn-outline-secondary badge edit-user-btn" type="button" data-id="<?=$user['id']?>" data-toggle="modal"
                                 data-target="#user-form-modal">Edit</button>
                               <button class="btn btn-sm btn-outline-secondary badge delete-user-btn" data-id="<?=$user['id']?>"  type="button"><i
                                   class="fa fa-trash" data-id="<?=$user['id']?>"></i></button>

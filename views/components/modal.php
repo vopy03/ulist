@@ -5,7 +5,7 @@ use App\Services\App;
 $roles = App::loadTable('roles');
 
 ?>
-<div class="modal fade" id="user-form-modal" tabindex="-1" aria-labelledby="user-form-modal" aria-hidden="true">
+<div class="modal fade" id="user-form-modal" data-modalType="create" tabindex="-1" aria-labelledby="user-form-modal" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -45,7 +45,7 @@ $roles = App::loadTable('roles');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" >Save</button>
+                        <button type="submit" id="modal-form-submit" class="btn btn-primary" >Save</button>
                     </div>
                 </form>
               
