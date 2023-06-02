@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-class Page {
+class Page
+{
 
-    public static function part($part) {
+    public static function part($part)
+    {
         require 'views/components/' . $part . '.php';
     }
-
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Services\Page;
 use App\Services\App;
@@ -8,8 +8,9 @@ use App\Services\App;
 <!DOCTYPE html>
 <html lang="en">
 <?php Page::part('head')  ?>
+
 <body>
-  
+
   <div class="container">
     <div class="row flex-lg-nowrap">
       <div class="col">
@@ -29,8 +30,7 @@ use App\Services\App;
                       <thead>
                         <tr>
                           <th class="align-top">
-                            <div
-                              class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
+                            <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
                               <input type="checkbox" class="custom-control-input" id="all-items">
                               <label class="custom-control-label" for="all-items"></label>
                             </div>
@@ -42,12 +42,12 @@ use App\Services\App;
                         </tr>
                       </thead>
                       <tbody>
-                      
-                      <?php Page::part('userlist') ?>
+
+                        <?php Page::part('userlist') ?>
 
                       </tbody>
                     </table>
-                      
+
                     <?php Page::part('actionbar'); ?>
 
                   </div>
@@ -59,10 +59,12 @@ use App\Services\App;
 
         <?php Page::part('modal'); ?>
         <?php Page::part('deleteConfirmModal'); ?>
+        <?php Page::part('warningModal'); ?>
 
       </div>
 
     </div>
   </div>
 </body>
+
 </html>

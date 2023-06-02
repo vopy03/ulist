@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Services\Router;
 use App\Controllers\User;
@@ -9,12 +9,9 @@ Router::page('/', 'list');
 
 Router::post('/actions/user/create', User::class, 'create', true);
 
-
-Router::post('/actions/status/off', User::class, 'disableStatus', true);
-Router::post('/actions/status/on', User::class, 'enableStatus', true);
+Router::post('/actions/change/status', User::class, 'changeStatus', true);
 
 Router::post('/actions/user/get/:id', User::class, 'get', true);
-
 
 Router::post('/actions/user/edit', User::class, 'edit', true);
 Router::post('/actions/user/delete', User::class, 'delete', true);
@@ -27,4 +24,4 @@ Router::post('/actions/list/refresh', UserList::class, 'refresh', true);
 // Router::post('/auth/register', Auth::class, 'register', true, true);
 
 
-Router::enable(); 
+Router::enable();

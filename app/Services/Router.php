@@ -3,7 +3,8 @@
 namespace App\Services;
 
 
-class Router {
+class Router
+{
 
     private static $list = [];
 
@@ -34,21 +35,21 @@ class Router {
         ];
     }
 
-    public static function enable() {
+    public static function enable()
+    {
 
         $query = isset($_GET['q']) ? $_GET['q'] : '';
 
-        
 
-        foreach(self::$list as $route) {
+
+        foreach (self::$list as $route) {
             if ($route["uri"] === '/' . $query) {
-                if(@$route["post"] && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (@$route["post"] && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     $action = new $route["class"];
                     $method = $route['method'];
-                    if($route['formdata'] && $route['files']) {
+                    if ($route['formdata'] && $route['files']) {
                         $action->$method($_POST, $_FILES);
-                    } 
-                    elseif ($route['formdata'] && !$route['files']) {
+                    } elseif ($route['formdata'] && !$route['files']) {
                         $action->$method($_POST);
                     } else {
                         $action->$method();
@@ -58,23 +59,22 @@ class Router {
                     require_once 'views/pages/' . $route["page"] . '.php';
                     die();
                 }
-            } else if ($params = self::matchRoute($route["uri"], $query)) {
+            } else if ($params = self::getDynamicParams($route["uri"], $query)) {
                 $action = new $route["class"];
                 $method = $route['method'];
                 $action->$method($params);
                 die();
             }
-            
         }
-            
+
         self::error(404);
     }
 
-    private static function matchRoute($registeredRoute, $currentRoute)
+    private static function getDynamicParams($registeredRoute, $currentRoute)
     {
         $registeredParts = explode('/', trim($registeredRoute, '/'));
         $currentParts = explode('/', trim($currentRoute, '/'));
-        
+
         // Check if the number of parts in the routes match
         if (count($registeredParts) !== count($currentParts)) {
             return false;
@@ -101,12 +101,14 @@ class Router {
         return $params;
     }
 
-    public static function error($e) {
-        require_once 'views/errors/'.$e.'.php';
+    public static function error($e)
+    {
+        require_once 'views/errors/' . $e . '.php';
     }
 
-    public static function redirect($uri) {
+    public static function redirect($uri)
+    {
         $add = '/ulist/';
-        header('Location: '.$add.$uri);
+        header('Location: ' . $add . $uri);
     }
 }
