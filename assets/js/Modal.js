@@ -52,8 +52,10 @@ class Modal {
     Modal.deleteModal.modal("show");
     if (data.ids !== undefined) {
       if (data.ids.length == 1) {
+        console.log(data)
         User.get(data.ids[0], (data) => {
-          deleteMessage.html(data.first_name + " " + data.last_name);
+          const user = data.user;
+          deleteMessage.html(user.first_name + " " + user.last_name);
         });
       } else {
         deleteMessage.html(data.ids.length + " users");
