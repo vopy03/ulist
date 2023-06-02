@@ -60,7 +60,7 @@ class Modal {
       }
     } else {
       User.get(data, (data) => {
-        user = data.user;
+        const user = data.user;
         deleteMessage.html(user.first_name + " " + user.last_name);
       });
     }

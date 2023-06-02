@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Services\Router;
-use App\Services\App;
-
 class User
 {
 
@@ -17,7 +14,7 @@ class User
     {
 
         // data processing before save
-        $data = array_map('App::prepareValue', $data);
+        $data = array_map('trim', $data);
 
         if (empty($data['first_name']) || empty($data['last_name'])) {
 

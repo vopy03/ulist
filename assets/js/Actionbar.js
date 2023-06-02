@@ -21,7 +21,6 @@ class Actionbar {
           formData.value = choise === "1" ? 1 : 0; // if selected 1: "actions/status/on" value is 1; else 0
           User.changeStatus(formData);
         } else {
-          console.log("del");
           Modal.openDeleteModal(formData);
         }
       } else if (

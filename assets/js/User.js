@@ -48,7 +48,7 @@ class User {
       url,
       data,
     }).done(function (data) {
-      console.log(data);
+      // console.log(data);
       List.refresh();
     });
   }
