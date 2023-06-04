@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Services\Router;
-
 class UserList
 {
 

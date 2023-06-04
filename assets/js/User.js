@@ -1,6 +1,6 @@
 class User {
   static create(data) {
-    const url = "actions/user/create";
+    const url = "user/create";
     $.ajax({
       type: "POST",
       url,
@@ -12,7 +12,7 @@ class User {
   }
 
   static edit(data) {
-    const url = "actions/user/edit";
+    const url = "user/edit";
     $.ajax({
       type: "POST",
       url,
@@ -24,7 +24,7 @@ class User {
   }
 
   static delete(data) {
-    const url = "actions/user/delete";
+    const url = "user/delete";
     $.ajax({
       type: "POST",
       url,
@@ -36,12 +36,8 @@ class User {
   }
 
   static changeStatus(data) {
-    /*
-     * @action: 'on', 'off'
-     *
-     */
 
-    const url = "actions/change/status";
+    const url = "user/status/change";
 
     $.ajax({
       type: "POST",
@@ -54,7 +50,7 @@ class User {
   }
 
   static get(id, func) {
-    const url = "actions/user/get/" + id;
+    const url = "user/get/" + id;
 
     $.ajax({
       url,

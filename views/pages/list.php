@@ -1,8 +1,6 @@
 <?php
 
 use App\Services\Page;
-use App\Services\App;
-// use App\Services\Router;
 
 ?>
 <!DOCTYPE html>
