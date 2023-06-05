@@ -2,6 +2,7 @@ class Modal {
   static modal = $("#user-form-modal");
   static modalForm = $("#modal-form");
   static modalSubmitBtn = $("#modal-form-submit");
+  static modalErrorMessage = $("#modal-error-message");
 
   static deleteModal = $("#user-delete-modal");
   static deleteModalSubmitBtn = $("#modal-delete-submit");
@@ -52,7 +53,6 @@ class Modal {
     Modal.deleteModal.modal("show");
     if (data.ids !== undefined) {
       if (data.ids.length == 1) {
-        console.log(data)
         User.get(data.ids[0], (data) => {
           const user = data.user;
           deleteMessage.html(user.first_name + " " + user.last_name);
@@ -83,7 +83,12 @@ class Modal {
     // remove possible event listeners before assign new one
     this.modalForm.off("submit");
 
+    // hide possible error message
+    Modal.modalErrorMessage.hide();
+
     this.modalForm.submit(function (e) {
+      e.preventDefault();
+
       const formData = {
         id: action == "edit" ? e.target.id.value : null,
         first_name: e.target.first_name.value,
@@ -92,19 +97,28 @@ class Modal {
         role_id: e.target.role_id.value,
       };
 
+      const callbackActions = (data) => {
+        // console.log(data)
+        if (data.status === true) {
+          // form reset after submit
+          e.target.reset();
+
+          // clear error message
+          Modal.modalErrorMessage.hide();
+
+          // close modal
+          Modal.modal.modal("hide");
+        } else {
+          Modal.modalErrorMessage.show();
+          Modal.modalErrorMessage.html("Помилка:<br>" + data.error.message);
+        }
+      };
+
       if (action == "create") {
-        User.create(formData);
+        User.create(formData, callbackActions);
       } else {
-        User.edit(formData);
+        User.edit(formData, callbackActions);
       }
-
-      e.preventDefault();
-
-      // form reset after submit
-      e.target.reset();
-
-      // close modal
-      Modal.modal.modal("hide");
     });
   };
 

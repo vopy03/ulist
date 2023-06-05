@@ -5,9 +5,9 @@ body{
 .active-circle {
   color: green;
 }
-/* .not-active-circle {
-  color: red;
-} */
+.not-active-circle {
+  color: grey;
+}
 
 .actionbar-container {
   padding: 5px 0;
@@ -27,4 +27,9 @@ table {
 
 .action-form {
   display: contents;
+}
+
+#modal-error-message {
+  margin: 1rem;
+  margin-top: 1.5rem;
 }

@@ -1,17 +1,19 @@
 class User {
-  static create(data) {
+  static create(data, callback) {
     const url = "user/create";
-    $.ajax({
+    return $.ajax({
       type: "POST",
       url,
       data,
     }).done(function (data) {
-      // console.log(data)
-      List.refresh();
+      data = JSON.parse(data);
+      console.log();
+      callback(data);
+      List.refreshList();
     });
   }
 
-  static edit(data) {
+  static edit(data, callback) {
     const url = "user/edit";
     $.ajax({
       type: "POST",
@@ -19,7 +21,9 @@ class User {
       data,
     }).done(function (data) {
       // console.log(data);
-      List.refresh();
+      data = JSON.parse(data);
+      callback(data);
+      List.updateUser(data.user);
     });
   }
 
@@ -31,12 +35,13 @@ class User {
       data,
     }).done(function (data) {
       // console.log(data);
-      List.refresh();
+      data = JSON.parse(data);
+      List.deleteUsers(data.ids);
+      // List.refreshList();
     });
   }
 
   static changeStatus(data) {
-
     const url = "user/status/change";
 
     $.ajax({
@@ -45,18 +50,18 @@ class User {
       data,
     }).done(function (data) {
       // console.log(data);
-      List.refresh();
+      List.refreshList();
     });
   }
 
-  static get(id, func) {
+  static get(id, callback) {
     const url = "user/get/" + id;
 
     $.ajax({
       url,
     }).then((data) => {
       data = JSON.parse(data);
-      func(data);
+      callback(data);
     });
   }
 }

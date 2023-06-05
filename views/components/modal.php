@@ -15,6 +15,7 @@ $roles = App::loadTable('roles');
                 </button>
             </div>
             <form method="post" action="#" id='modal-form'>
+                <p id="modal-error-message"></p>
                 <input type="number" class="form-control" name="id" value="0" id="id" hidden>
                 <div class="modal-body">
                     <div class="form-group">

@@ -1,5 +1,22 @@
 class List {
+  static users = [];
+  static roles = [];
+
   static init() {
+    List.updateListeners();
+
+    List.getUsers((data) => {
+      this.users = data.users;
+      // console.log(this.users);
+    });
+
+    List.getRoles((data) => {
+      this.roles = data.roles;
+      // console.log(this.roles);
+    });
+  }
+
+  static updateListeners() {
     const deleteBtns = document.querySelectorAll(".delete-user-btn");
     const editBtns = document.querySelectorAll(".edit-user-btn");
     // console.log(btns);
@@ -13,14 +30,73 @@ class List {
     });
   }
 
-  static refresh() {
+  static refreshList() {
     $.ajax({
       type: "POST",
       url: "list/refresh",
     }).done(function (data) {
       $("table tbody").html(data);
       Selection.update();
-      List.init();
+      List.updateListeners();
+    });
+  }
+
+  static updateUser(data) {
+    const userFullname = $("tr[data-id=" + data.id + "] .user-fullname");
+    const userRole = $("tr[data-id=" + data.id + "] .user-role");
+    const userStatus = $("tr[data-id=" + data.id + "] i.fa-circle");
+    userFullname.html(data.first_name + " " + data.last_name);
+    userRole.html(List.roles.find((r) => r.id === data.role_id).name);
+
+    if (data.status === "1") {
+      userStatus.removeClass("not-active-circle");
+      userStatus.removeClass("active-circle");
+
+      userStatus.addClass("active-circle");
+    } else {
+      userStatus.removeClass("not-active-circle");
+
+      userStatus.addClass("not-active-circle");
+      userStatus.removeClass("active-circle");
+    }
+  }
+
+  static deleteUsers(data) {
+    if (Object.keys(data)[0] !== "ids") {
+      const user = document.querySelector(
+        "tr[data-id='" + Object.keys(data)[0] + "']"
+      );
+      user.remove();
+    } else {
+      data.ids.forEach((id) => {
+        const user = document.querySelector("tr[data-id='" + id + "']");
+        user.remove();
+      });
+    }
+  }
+
+  static getUsers(callback) {
+    $.ajax({
+      type: "POST",
+      url: "list/get/users",
+    }).done(function (data) {
+      // Selection.update();
+      // console.log(data);
+      data = JSON.parse(data);
+      callback(data);
+      // List.init();
+    });
+  }
+  static getRoles(callback) {
+    $.ajax({
+      type: "POST",
+      url: "list/get/roles",
+    }).done(function (data) {
+      // Selection.update();
+      // console.log(data);
+      data = JSON.parse(data);
+      callback(data);
+      // List.init();
     });
   }
 }

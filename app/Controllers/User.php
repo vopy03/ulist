@@ -38,6 +38,8 @@ class User
 
         \R::store($user);
 
+        $user->id = \R::getInsertID();
+
         echo JSON_encode([
             "status" => true,
             "error" => null,
