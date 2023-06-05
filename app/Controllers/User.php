@@ -125,6 +125,7 @@ class User
         echo JSON_encode([
             "status" => true,
             "error" => null,
+            "ids" => $data['ids'],
             "userStatus" => $value
         ]);
     }

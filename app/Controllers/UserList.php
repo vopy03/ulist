@@ -7,10 +7,32 @@ use App\Services\App;
 class UserList
 {
 
+    static $roles;
+
+    public static function init()
+    {
+        $roles = App::loadTable('roles');
+
+        $rolesArr = [];
+
+        foreach ($roles as $role) {
+            $rolesArr[$role['id']] = $role['name'];
+        }
+        self::$roles = $rolesArr;
+    }
 
     public static function refresh()
     {
         include('views/components/userlist.php');
+        die();
+    }
+
+    public static function getUserItem($data) {
+        
+        $roles = self::$roles;
+        $user = $data["user"];
+        // var_dump($roles);
+        include('views/components/useritem.php');
         die();
     }
 
@@ -47,13 +69,7 @@ class UserList
         $rolesArr = [];
 
         foreach ($roles as $role) {
-            array_push(
-                $rolesArr,
-                [
-                    "id" => $role['id'],
-                    "name" => $role['name'],
-                ]
-            );
+            $rolesArr[$role['id']] = $role['name'];
         }
         echo JSON_encode([
             "status" => true,

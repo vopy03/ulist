@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Controllers\UserList;
 
 class App
 {
@@ -10,6 +11,7 @@ class App
     {
         self::libs();
         self::db();
+        UserList::init();
     }
 
     public static function libs()

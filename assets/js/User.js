@@ -9,7 +9,7 @@ class User {
       data = JSON.parse(data);
       console.log();
       callback(data);
-      List.refreshList();
+      List.createUser(data);
     });
   }
 
@@ -50,7 +50,8 @@ class User {
       data,
     }).done(function (data) {
       // console.log(data);
-      List.refreshList();
+      data = JSON.parse(data)
+      List.updateUserStatuses(data);
     });
   }
 

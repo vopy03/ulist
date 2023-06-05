@@ -14,6 +14,7 @@ class Selection {
   };
 
   static update = () => {
+    this.allCheckBoxes = [];
     this.allCheckBoxes = document.querySelectorAll('td input[type="checkbox"]');
     this.mainCheckBox.checked = false;
     this.init();
@@ -58,6 +59,7 @@ class Selection {
 
   static getCheckedItemsId = () => {
     const checkedItemsId = [];
+    
     this.allCheckBoxes.forEach((checkbox) => {
       if (checkbox.checked) checkedItemsId.push(Number(checkbox.dataset.id));
     });

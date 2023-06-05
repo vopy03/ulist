@@ -46,7 +46,7 @@ class List {
     const userRole = $("tr[data-id=" + data.id + "] .user-role");
     const userStatus = $("tr[data-id=" + data.id + "] i.fa-circle");
     userFullname.html(data.first_name + " " + data.last_name);
-    userRole.html(List.roles.find((r) => r.id === data.role_id).name);
+    userRole.html(List.roles[data.role_id]);
 
     if (data.status === "1") {
       userStatus.removeClass("not-active-circle");
@@ -61,6 +61,24 @@ class List {
     }
   }
 
+  static updateUserStatuses(data) {
+    console.log(data);
+    data.ids.forEach(id => {
+      const userStatus = $("tr[data-id=" + id + "] i.fa-circle");
+      if (data.userStatus == 1) {
+        userStatus.removeClass("not-active-circle");
+        userStatus.removeClass("active-circle");
+  
+        userStatus.addClass("active-circle");
+      } else {
+        userStatus.removeClass("not-active-circle");
+  
+        userStatus.addClass("not-active-circle");
+        userStatus.removeClass("active-circle");
+      }
+    });
+  }
+
   static deleteUsers(data) {
     if (Object.keys(data)[0] !== "ids") {
       const user = document.querySelector(
@@ -73,6 +91,27 @@ class List {
         user.remove();
       });
     }
+    Selection.update();
+  }
+
+  static createUser(data) {
+    List.getUserItem(data, (data) => {
+      $("tbody").append(data);
+      Selection.update();
+      List.updateListeners();
+    })
+  }
+
+  static getUserItem(data, callback) {
+
+    $.ajax({
+      type: "POST",
+      data,
+      url: "list/get/useritem",
+    }).done(function (data) {
+      callback(data);
+      List.updateListeners();
+    });
   }
 
   static getUsers(callback) {
