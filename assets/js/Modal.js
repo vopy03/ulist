@@ -80,7 +80,7 @@ class Modal {
     this.deleteModalSubmitBtn.off("click");
     this.deleteModalSubmitBtn.on("click", (e) => {
       // console.log(data)
-      User.delete({ids:data});
+      User.delete(data);
       Modal.deleteModal.modal("hide");
     });
   };
