@@ -98,7 +98,9 @@ class Router
             return false;
         }
 
-        return $params;
+        return reset($params);
+
+        
     }
 
     public static function error($e)

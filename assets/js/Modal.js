@@ -30,16 +30,26 @@ class Modal {
     });
   };
 
-  static setUserData = (id) => {
+  static prepareUserToEdit = (id) => {
     User.get(id, (data) => {
-      Modal.setData(data.user);
+      if(data.status) {
+        Modal.setData(data.user);
+        Modal.openEditModal()
+      } else {
+        Modal.openWarningModal(data.error.message)
+      }
+      
     });
   };
 
-  static openEditModal = (id) => {
+  static openEditModal = () => {
+    if(this.modalForm.find("#id").val() != "0") {
+      Modal.modal.modal("show");
+    } else {
+      Modal.modal.modal("hide");
+    }
     Modal.changeModalType("edit");
     Modal.assignSubmitAction("edit");
-    Modal.setUserData(id);
   };
 
   static openWarningModal = (message) => {
@@ -49,27 +59,28 @@ class Modal {
 
   static openDeleteModal = (data) => {
     const deleteMessage = $("#modal-delete-message");
-
-    Modal.deleteModal.modal("show");
-    if (data.ids !== undefined) {
-      if (data.ids.length == 1) {
-        User.get(data.ids[0], (data) => {
+    // console.log(Array.isArray(da   ta))
+      if (Array.isArray(data) && data.length == 1) {
+        User.get(data[0], (data) => {
+          Modal.deleteModal.modal("show");
+          const user = data.user;
+          deleteMessage.html(user.first_name + " " + user.last_name);
+        });
+      } else if (!Array.isArray(data)) {
+        // console.log(data)
+        User.get(data, (data) => {
+          Modal.deleteModal.modal("show");
           const user = data.user;
           deleteMessage.html(user.first_name + " " + user.last_name);
         });
       } else {
-        deleteMessage.html(data.ids.length + " users");
+        deleteMessage.html(data.length + " users");
       }
-    } else {
-      User.get(data, (data) => {
-        const user = data.user;
-        deleteMessage.html(user.first_name + " " + user.last_name);
-      });
-    }
 
     this.deleteModalSubmitBtn.off("click");
     this.deleteModalSubmitBtn.on("click", (e) => {
-      User.delete(data);
+      // console.log(data)
+      User.delete({ids:data});
       Modal.deleteModal.modal("hide");
     });
   };
@@ -108,6 +119,7 @@ class Modal {
 
           // close modal
           Modal.modal.modal("hide");
+          
         } else {
           Modal.modalErrorMessage.show();
           Modal.modalErrorMessage.html("Помилка:<br>" + data.error.message);

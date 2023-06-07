@@ -7,9 +7,11 @@ class User {
       data,
     }).done(function (data) {
       data = JSON.parse(data);
-      console.log();
+      
       callback(data);
-      List.createUser(data);
+      if (data.status === true) {
+        List.createUser(data);
+      }
     });
   }
 
@@ -23,7 +25,9 @@ class User {
       // console.log(data);
       data = JSON.parse(data);
       callback(data);
-      List.updateUser(data.user);
+      if (data.status === true) {
+        List.updateUser(data.user);
+      }
     });
   }
 
@@ -36,7 +40,12 @@ class User {
     }).done(function (data) {
       // console.log(data);
       data = JSON.parse(data);
-      List.deleteUsers(data.ids);
+      if (data.status === true) {
+        List.deleteUsers(data);
+      }
+      else {
+        Modal.openWarningModal(data.error.message)
+      }
       // List.refreshList();
     });
   }
@@ -62,7 +71,12 @@ class User {
       url,
     }).then((data) => {
       data = JSON.parse(data);
-      callback(data);
+      if(data.status) {
+        callback(data);
+      } else {
+        Modal.openWarningModal(data.error.message)
+      }
+      
     });
   }
 }

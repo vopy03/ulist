@@ -65,6 +65,17 @@ class User
             die();
         }
 
+        if($data['id'] == 0) {
+            echo JSON_encode([
+                "status" => false,
+                "error" => [
+                    "code" => 404,
+                    "message" => "User not found"
+                ]
+            ]);
+            die();
+        }
+
         $user = \R::load('users', $data['id']);
 
         $user->first_name = $data['first_name'];
@@ -83,12 +94,15 @@ class User
 
     public function delete($ids)
     {
-        if (isset($ids['ids'])) {
-            $users = \R::loadAll('users', $ids['ids']);
-            \R::trashAll($users);
-        } else {
-            $user = \R::load('users', key($ids));
+
+        $ids = $ids['ids'];
+        if (is_numeric($ids)) {
+            $user = \R::load('users', $ids);
             \R::trash($user);
+            
+        } else {
+            $users = \R::loadAll('users', $ids);
+            \R::trashAll($users);
         }
 
         echo JSON_encode([
@@ -100,14 +114,24 @@ class User
 
     public function get($id)
     {
-        $id = $id['id'];
+        // var_dump($id);
         $user = \R::load('users', $id);
-
-        echo JSON_encode([
-            "status" => true,
-            "error" => null,
-            "user" => $user
-        ]);
+        
+        if(count($user) <= 1) {
+            echo JSON_encode([
+                "status" => false,
+                "error" => ["code" => 404, "message" => "User not found"],
+                "user" => null
+            ]);
+        }
+        else {
+            echo JSON_encode([
+                "status" => true,
+                "error" => null,
+                "user" => $user,
+            ]);
+        }
+        
     }
 
     public function changeStatus($data)

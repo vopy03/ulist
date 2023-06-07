@@ -21,12 +21,12 @@ class List {
     const editBtns = document.querySelectorAll(".edit-user-btn");
     // console.log(btns);
     deleteBtns.forEach((btn) => {
-      btn.onclick = (e) => Modal.openDeleteModal(e.target.dataset.id);
+      btn.onclick = (e) => Modal.openDeleteModal( Number(e.target.dataset.id) );
     });
 
     // fix this. This for submit event. Not for opening the modal
     editBtns.forEach((btn) => {
-      btn.onclick = (e) => Modal.openEditModal(e.target.dataset.id);
+      btn.onclick = (e) => Modal.prepareUserToEdit(Number(e.target.dataset.id));
     });
   }
 
@@ -79,10 +79,11 @@ class List {
     });
   }
 
-  static deleteUsers(data) {
-    if (Object.keys(data)[0] !== "ids") {
+  static deleteUsers(data) {  
+    // console.log(data.ids);
+    if (Number.isInteger(Number(data.ids))) {
       const user = document.querySelector(
-        "tr[data-id='" + Object.keys(data)[0] + "']"
+        "tr[data-id='" + data.ids + "']"
       );
       user.remove();
     } else {
