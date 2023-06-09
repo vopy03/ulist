@@ -94,7 +94,6 @@ class User
 
     public function delete($ids)
     {
-
         $ids = $ids['ids'];
         if (is_numeric($ids)) {
             $user = \R::load('users', $ids);
@@ -136,7 +135,7 @@ class User
 
     public function changeStatus($data)
     {
-
+        // var_dump($data);
         $value = (int)$data['value'];
         $users = \R::loadAll('users', $data['ids']);
 

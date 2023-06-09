@@ -97,7 +97,7 @@ class Router
 
             return false;
         }
-
+        
         return reset($params);
 
         

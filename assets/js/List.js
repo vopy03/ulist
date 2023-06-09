@@ -62,7 +62,7 @@ class List {
   }
 
   static updateUserStatuses(data) {
-    console.log(data);
+    // console.log(data);
     data.ids.forEach(id => {
       const userStatus = $("tr[data-id=" + id + "] i.fa-circle");
       if (data.userStatus == 1) {

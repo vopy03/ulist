@@ -59,7 +59,7 @@ class Modal {
 
   static openDeleteModal = (data) => {
     const deleteMessage = $("#modal-delete-message");
-    // console.log(Array.isArray(da   ta))
+    // console.log(Array.isArray(data))
       if (Array.isArray(data) && data.length == 1) {
         User.get(data[0], (data) => {
           Modal.deleteModal.modal("show");
@@ -74,13 +74,14 @@ class Modal {
           deleteMessage.html(user.first_name + " " + user.last_name);
         });
       } else {
+        Modal.deleteModal.modal("show");
         deleteMessage.html(data.length + " users");
       }
 
     this.deleteModalSubmitBtn.off("click");
     this.deleteModalSubmitBtn.on("click", (e) => {
       // console.log(data)
-      User.delete(data);
+      User.delete({ids:data});
       Modal.deleteModal.modal("hide");
     });
   };
