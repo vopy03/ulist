@@ -22,8 +22,6 @@ Router::post('/list/refresh', UserList::class, 'refresh', true);
 
 Router::post('/list/get/users', UserList::class, 'getUsers', true);
 
-Router::post('/list/get/useritem', UserList::class, 'getUserItem', true);
-
 Router::post('/list/get/roles', UserList::class, 'getRoles', true);
 
 

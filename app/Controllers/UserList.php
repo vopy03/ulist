@@ -27,15 +27,6 @@ class UserList
         die();
     }
 
-    public static function getUserItem($data) {
-        
-        $roles = self::$roles;
-        $user = $data["user"];
-        // var_dump($roles);
-        include('views/components/useritem.php');
-        die();
-    }
-
     public static function getUsers()
     {
         $users = App::loadTable('users');

@@ -1,14 +1,13 @@
 class List {
-  static users = [];
   static roles = [];
 
   static init() {
     List.updateListeners();
 
-    List.getUsers((data) => {
-      this.users = data.users;
-      // console.log(this.users);
-    });
+    // List.getUsers((data) => {
+    //   this.users = data.users;
+    //   // console.log(this.users);
+    // });
 
     List.getRoles((data) => {
       this.roles = data.roles;
@@ -21,7 +20,7 @@ class List {
     const editBtns = document.querySelectorAll(".edit-user-btn");
     // console.log(btns);
     deleteBtns.forEach((btn) => {
-      btn.onclick = (e) => Modal.openDeleteModal( Number(e.target.dataset.id) );
+      btn.onclick = (e) => Modal.openDeleteModal(Number(e.target.dataset.id));
     });
 
     // fix this. This for submit event. Not for opening the modal
@@ -63,28 +62,26 @@ class List {
 
   static updateUserStatuses(data) {
     // console.log(data);
-    data.ids.forEach(id => {
+    data.ids.forEach((id) => {
       const userStatus = $("tr[data-id=" + id + "] i.fa-circle");
       if (data.userStatus == 1) {
         userStatus.removeClass("not-active-circle");
         userStatus.removeClass("active-circle");
-  
+
         userStatus.addClass("active-circle");
       } else {
         userStatus.removeClass("not-active-circle");
-  
+
         userStatus.addClass("not-active-circle");
         userStatus.removeClass("active-circle");
       }
     });
   }
 
-  static deleteUsers(data) {  
+  static deleteUsers(data) {
     // console.log(data.ids);
     if (Number.isInteger(Number(data.ids))) {
-      const user = document.querySelector(
-        "tr[data-id='" + data.ids + "']"
-      );
+      const user = document.querySelector("tr[data-id='" + data.ids + "']");
       user.remove();
     } else {
       data.ids.forEach((id) => {
@@ -96,23 +93,65 @@ class List {
   }
 
   static createUser(data) {
-    List.getUserItem(data, (data) => {
-      $("tbody").append(data);
-      Selection.update();
-      List.updateListeners();
-    })
-  }
+    const user = data.user;
+    const user_status =
+      user.status == "1" ? "active-circle" : "not-active-circle";
+    let tr =
+      '<tr data-id="' +
+      user.id +
+      '">' +
+      '<td class="align-middle">' +
+      '<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">' +
+      '<input type="checkbox" class="custom-control-input" data-id="' +
+      user.id +
+      '" id="item-' +
+      user.id +
+      '">' +
+      '<label class="custom-control-label" for="item-' +
+      user.id +
+      '"></label>' +
+      "</div>" +
+      "</td>" +
+      '<td class="text-nowrap align-middle">' +
+      '<span class="user-fullname">' +
+      user.first_name +
+      " " +
+      user.last_name +
+      "</span>" +
+      "</td>" +
+      '<td class="text-nowrap align-middle">' +
+      '<span class="user-role">' +
+      List.roles[user.role_id] +
+      "</span>" +
+      "</td>" +
+      '<td class="text-center align-middle">' +
+      '<span class="user-status"><i class="fa fa-circle ' +
+      user_status +
+      '"></i>' +
+      "</td>" +
+      '<td class="text-center align-middle">' +
+      '<div class="btn-group align-top">' +
+      '<button class="btn btn-sm btn-outline-secondary badge edit-user-btn" type="button" data-id="' +
+      user.id +
+      '" data-toggle="modal" data-target="#user-form-modal">' +
+      '<i class="fa fa-pencil" data-id="' +
+      user.id +
+      '"></i>' +
+      "</button>" +
+      '<button class="btn btn-sm btn-outline-secondary badge delete-user-btn" data-id="' +
+      user.id +
+      '" type="button" data-toggle="modal" data-target="#user-delete-modal">' +
+      '<i class="fa fa-trash" data-id="' +
+      user.id +
+      '"></i>' +
+      "</button>" +
+      "</div>" +
+      "</td>" +
+      "</tr>";
 
-  static getUserItem(data, callback) {
-
-    $.ajax({
-      type: "POST",
-      data,
-      url: "list/get/useritem",
-    }).done(function (data) {
-      callback(data);
-      List.updateListeners();
-    });
+    $("tbody").append(tr);
+    Selection.update();
+    List.updateListeners();
   }
 
   static getUsers(callback) {
@@ -120,11 +159,8 @@ class List {
       type: "POST",
       url: "list/get/users",
     }).done(function (data) {
-      // Selection.update();
-      // console.log(data);
       data = JSON.parse(data);
       callback(data);
-      // List.init();
     });
   }
   static getRoles(callback) {

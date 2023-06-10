@@ -7,7 +7,7 @@ class User {
       data,
     }).done(function (data) {
       data = JSON.parse(data);
-      
+
       callback(data);
       if (data.status === true) {
         List.createUser(data);
@@ -42,9 +42,8 @@ class User {
       data = JSON.parse(data);
       if (data.status === true) {
         List.deleteUsers(data);
-      }
-      else {
-        Modal.openWarningModal(data.error.message)
+      } else {
+        Modal.openWarningModal(data.error.message);
       }
       // List.refreshList();
     });
@@ -59,7 +58,7 @@ class User {
       data,
     }).done(function (data) {
       // console.log(data);
-      data = JSON.parse(data)
+      data = JSON.parse(data);
       List.updateUserStatuses(data);
     });
   }
@@ -71,12 +70,11 @@ class User {
       url,
     }).then((data) => {
       data = JSON.parse(data);
-      if(data.status) {
+      if (data.status) {
         callback(data);
       } else {
-        Modal.openWarningModal(data.error.message)
+        Modal.openWarningModal(data.error.message);
       }
-      
     });
   }
 }
