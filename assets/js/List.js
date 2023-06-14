@@ -23,7 +23,6 @@ class List {
       btn.onclick = (e) => Modal.openDeleteModal(Number(e.target.dataset.id));
     });
 
-    // fix this. This for submit event. Not for opening the modal
     editBtns.forEach((btn) => {
       btn.onclick = (e) => Modal.prepareUserToEdit(Number(e.target.dataset.id));
     });

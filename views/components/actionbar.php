@@ -1,6 +1,6 @@
 <div class="actionbar-container">
 
-  <button class="btn btn-success" type="button" id="add-user-btn">Add</button>
+  <button class="btn btn-success add-user-btn" type="button" id="add-user-btn">Add</button>
   <form method="post" class="action-form">
     <select class="custom-select" name="action" id="actionSelect">
       <option selected>-Please Select-</option>

@@ -1,10 +1,10 @@
 class Actionbar {
-  static addBtn = $("#add-user-btn");
+  static addBtn = document.querySelectorAll(".add-user-btn");
 
   static init() {
-    this.addBtn.off("click");
-    this.addBtn.click(() => {
-      Modal.openAddModal();
+
+    this.addBtn.forEach((btn) => {
+      btn.onclick = (e) => Modal.openAddModal();
     });
 
     $("form").off("submit");
