@@ -52,25 +52,40 @@ class Modal {
   };
 
   static openWarningModal = (message) => {
+    this.modal.modal('hide')
+    this.deleteModal.modal('hide')
     this.warningModal.modal("show");
     this.warningModalMessage.html(message);
   };
 
+  static openAddModal = (message) => {
+    this.deleteModal.modal('hide')
+    this.warningModal.modal("hide");
+    Modal.changeModalType("create");
+    this.modal.modal('show')
+  };
+
   static openDeleteModal = (data) => {
+    this.modal.modal('hide')
+    this.warningModal.modal("hide");
     const deleteMessage = $("#modal-delete-message");
     // console.log(Array.isArray(data))
     if (Array.isArray(data) && data.length == 1) {
       User.get(data[0], (data) => {
-        Modal.deleteModal.modal("show");
-        const user = data.user;
-        deleteMessage.html(user.first_name + " " + user.last_name);
+        if(data.status) {
+          Modal.deleteModal.modal("show");
+          const user = data.user;
+          deleteMessage.html(user.first_name + " " + user.last_name);
+        }
       });
     } else if (!Array.isArray(data)) {
       // console.log(data)
       User.get(data, (data) => {
-        Modal.deleteModal.modal("show");
-        const user = data.user;
-        deleteMessage.html(user.first_name + " " + user.last_name);
+        if(data.status) {
+          Modal.deleteModal.modal("show");
+          const user = data.user;
+          deleteMessage.html(user.first_name + " " + user.last_name);
+        }
       });
     } else {
       Modal.deleteModal.modal("show");

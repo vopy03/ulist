@@ -4,7 +4,7 @@ class Actionbar {
   static init() {
     this.addBtn.off("click");
     this.addBtn.click(() => {
-      Modal.changeModalType("create");
+      Modal.openAddModal();
     });
 
     $("form").off("submit");
